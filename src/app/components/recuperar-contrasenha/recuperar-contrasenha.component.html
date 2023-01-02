@@ -1,0 +1,25 @@
+<div class="wrapper">
+    <div *ngIf="!loading" class="body">
+        <img class="logo" src="../../../assets/imagen/login.png" alt="Login">
+        <h1>Recuperar</h1>
+        <form [formGroup]="recuperarAcceso" (ngSubmit)="recuperarAccesoUsuario()">
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="input-email" formControlName="correo" placeholder="name@example.com">
+                <label>Dirección de correo</label>
+                <span class="text-danger borde-izquierdo" 
+                *ngIf="recuperarAcceso.get('correo')?.hasError('required') && recuperarAcceso.get('correo')?.touched">
+                    El <strong>correo</strong> es requerido
+                </span>
+                <span class="text-danger borde-izquierdo" 
+                *ngIf="recuperarAcceso.get('correo')?.hasError('email') && recuperarAcceso.get('correo')?.touched">
+                    El <strong>correo</strong> está en un formato desconocido.
+                </span>
+            </div>
+            <div class="d-grid gap-2 mb-3">
+                <button type="submit" class="btn btn-primary btn-lg" [disabled]="recuperarAcceso.invalid">Recuperar</button>
+            </div>
+            <p class="mt-3">¿No tienes cuenta?  <a routerLink="/login">Volver</a></p>
+        </form>
+    </div>
+    <app-spinner *ngIf="loading"></app-spinner>
+</div>
